@@ -28,11 +28,13 @@
         {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
       {% endif %}
       
+      {%- assign thirty_days_ago = 'now' | date: '%s' | minus: 2592000 -%}
+      {%- assign product_date = product.created_at | date: '%s' -%}
       {% if product.available == false %}
         <span class="product-card__badge product-card__badge--sold-out">Sold Out</span>
       {% elsif product.compare_at_price > product.price %}
         <span class="product-card__badge product-card__badge--sale">Sale</span>
-      {% elsif product.created_at > "now" | date: "%s" | minus: 2592000 | date: "%Y-%m-%d" %}
+      {% elsif product_date > thirty_days_ago %}
         <span class="product-card__badge">New</span>
       {% endif %}
     </div>
