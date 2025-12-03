@@ -1,0 +1,388 @@
+{%- style -%}
+  .product-main {
+    padding: 2rem 0 4rem;
+  }
+  
+  .product-main__wrapper {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    gap: 3rem;
+  }
+  
+  @media (min-width: 1024px) {
+    .product-main__wrapper {
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+  }
+  
+  .product-main__gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .product-main__image {
+    aspect-ratio: 1;
+    background: var(--color-background-secondary);
+    overflow: hidden;
+  }
+  
+  .product-main__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .product-main__thumbnails {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+  }
+  
+  .product-main__thumbnail {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+    background: var(--color-background-secondary);
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+  }
+  
+  .product-main__thumbnail.is-active,
+  .product-main__thumbnail:hover {
+    border-color: var(--color-primary);
+  }
+  
+  .product-main__thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .product-main__info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .product-main__vendor {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  
+  .product-main__title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.1;
+    margin: 0;
+  }
+  
+  .product-main__price {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .product-main__price-current {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    color: var(--color-primary);
+  }
+  
+  .product-main__price-compare {
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+    text-decoration: line-through;
+  }
+  
+  .product-main__price-badge {
+    padding: 0.25rem 0.75rem;
+    background: var(--color-secondary);
+    color: var(--color-background);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  
+  .product-main__description {
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+  
+  .product-main__variants {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .product-main__variant-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+  }
+  
+  .product-main__variant-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .product-main__variant-option {
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--color-text);
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .product-main__variant-option:hover,
+  .product-main__variant-option.is-active {
+    border-color: var(--color-primary);
+    background: rgba(170, 255, 0, 0.1);
+  }
+  
+  .product-main__variant-option:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    text-decoration: line-through;
+  }
+  
+  .product-main__quantity {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .product-main__quantity-wrapper {
+    display: flex;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .product-main__quantity-btn {
+    width: 48px;
+    height: 48px;
+    background: transparent;
+    border: none;
+    color: var(--color-text);
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .product-main__quantity-btn:hover {
+    background: var(--color-primary);
+    color: var(--color-background);
+  }
+  
+  .product-main__quantity-input {
+    width: 60px;
+    height: 48px;
+    text-align: center;
+    background: transparent;
+    border: none;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--color-text);
+    font-size: 1rem;
+    -moz-appearance: textfield;
+  }
+  
+  .product-main__add-btn {
+    flex: 1;
+    max-width: 400px;
+  }
+  
+  .product-main__features {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .product-main__feature {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+  }
+  
+  .product-main__feature svg {
+    width: 20px;
+    height: 20px;
+    color: var(--color-primary);
+  }
+{%- endstyle -%}
+
+<section class="product-main">
+  <div class="product-main__wrapper">
+    <div class="product-main__gallery">
+      <div class="product-main__image">
+        {% if product.featured_image != blank %}
+          <img 
+            src="{{ product.featured_image | image_url: width: 1000 }}"
+            alt="{{ product.featured_image.alt | default: product.title }}"
+            width="1000"
+            height="1000"
+            id="product-main-image"
+          >
+        {% else %}
+          {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {% endif %}
+      </div>
+      
+      {% if product.images.size > 1 %}
+        <div class="product-main__thumbnails">
+          {% for image in product.images %}
+            <button 
+              type="button"
+              class="product-main__thumbnail {% if forloop.first %}is-active{% endif %}"
+              data-image-url="{{ image | image_url: width: 1000 }}"
+            >
+              <img 
+                src="{{ image | image_url: width: 100 }}"
+                alt="{{ image.alt | default: product.title }}"
+                width="80"
+                height="80"
+                loading="lazy"
+              >
+            </button>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+    
+    <div class="product-main__info">
+      {% if product.vendor != blank %}
+        <span class="product-main__vendor">{{ product.vendor }}</span>
+      {% endif %}
+      
+      <h1 class="product-main__title">{{ product.title }}</h1>
+      
+      <div class="product-main__price">
+        <span class="product-main__price-current">{{ product.price | money }}</span>
+        {% if product.compare_at_price > product.price %}
+          <span class="product-main__price-compare">{{ product.compare_at_price | money }}</span>
+          {% assign discount = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price %}
+          <span class="product-main__price-badge">-{{ discount }}%</span>
+        {% endif %}
+      </div>
+      
+      {% if product.description != blank %}
+        <div class="product-main__description">
+          {{ product.description }}
+        </div>
+      {% endif %}
+      
+      <form action="/cart/add" method="post" enctype="multipart/form-data">
+        {% unless product.has_only_default_variant %}
+          {% for option in product.options_with_values %}
+            <div class="product-main__variants">
+              <span class="product-main__variant-label">{{ option.name }}</span>
+              <div class="product-main__variant-options">
+                {% for value in option.values %}
+                  <button 
+                    type="button"
+                    class="product-main__variant-option {% if forloop.first %}is-active{% endif %}"
+                    data-option="{{ option.name }}"
+                    data-value="{{ value }}"
+                  >
+                    {{ value }}
+                  </button>
+                {% endfor %}
+              </div>
+            </div>
+          {% endfor %}
+        {% endunless %}
+        
+        <select name="id" id="product-select" class="visually-hidden">
+          {% for variant in product.variants %}
+            <option 
+              value="{{ variant.id }}"
+              {% unless variant.available %}disabled{% endunless %}
+            >
+              {{ variant.title }} - {{ variant.price | money }}
+            </option>
+          {% endfor %}
+        </select>
+        
+        <div class="product-main__quantity">
+          <div class="product-main__quantity-wrapper" data-quantity-wrapper>
+            <button type="button" class="product-main__quantity-btn" data-quantity-minus>-</button>
+            <input 
+              type="number" 
+              name="quantity" 
+              value="1" 
+              min="1" 
+              class="product-main__quantity-input"
+              data-quantity-input
+            >
+            <button type="button" class="product-main__quantity-btn" data-quantity-plus>+</button>
+          </div>
+          
+          <button 
+            type="submit" 
+            class="btn btn-gradient product-main__add-btn"
+            data-add-to-cart
+            {% unless product.available %}disabled{% endunless %}
+          >
+            {% if product.available %}
+              Add to Bag
+            {% else %}
+              Sold Out
+            {% endif %}
+          </button>
+        </div>
+      </form>
+      
+      <div class="product-main__features">
+        <div class="product-main__feature">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+          <span>Free shipping on orders over $100</span>
+        </div>
+        <div class="product-main__feature">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+          </svg>
+          <span>30-day easy returns</span>
+        </div>
+        <div class="product-main__feature">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+          <span>Secure checkout</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Simple thumbnail gallery
+  document.querySelectorAll('.product-main__thumbnail').forEach(thumb => {
+    thumb.addEventListener('click', function() {
+      document.querySelectorAll('.product-main__thumbnail').forEach(t => t.classList.remove('is-active'));
+      this.classList.add('is-active');
+      document.getElementById('product-main-image').src = this.dataset.imageUrl;
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Product Main",
+  "class": "section-product-main",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,231 @@
+{%- style -%}
+  .cart-main {
+    padding: 4rem 0;
+    min-height: 60vh;
+  }
+  
+  .cart-main__wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  
+  .cart-main__title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    text-align: center;
+    margin-bottom: 3rem;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .cart-main__empty {
+    text-align: center;
+    padding: 4rem 2rem;
+  }
+  
+  .cart-main__empty-text {
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+    margin-bottom: 2rem;
+  }
+  
+  .cart-main__items {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .cart-main__item {
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: var(--color-background-secondary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  @media (max-width: 640px) {
+    .cart-main__item {
+      grid-template-columns: 80px 1fr;
+      gap: 1rem;
+    }
+  }
+  
+  .cart-main__item-image {
+    aspect-ratio: 1;
+    background: var(--color-background);
+  }
+  
+  .cart-main__item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .cart-main__item-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .cart-main__item-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.25rem;
+    color: var(--color-text);
+  }
+  
+  .cart-main__item-variant {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+  
+  .cart-main__item-price {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+  
+  .cart-main__item-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+  }
+  
+  @media (max-width: 640px) {
+    .cart-main__item-actions {
+      grid-column: 1 / -1;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+  
+  .cart-main__summary {
+    padding: 2rem;
+    background: var(--color-background-secondary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .cart-main__subtotal {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .cart-main__subtotal-price {
+    color: var(--color-primary);
+  }
+  
+  .cart-main__note {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .cart-main__checkout {
+    width: 100%;
+  }
+  
+  .cart-main__continue {
+    display: block;
+    text-align: center;
+    margin-top: 1rem;
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+  }
+  
+  .cart-main__continue:hover {
+    color: var(--color-primary);
+  }
+{%- endstyle -%}
+
+<section class="cart-main">
+  <div class="cart-main__wrapper">
+    <h1 class="cart-main__title">Your Bag</h1>
+    
+    {% if cart.item_count > 0 %}
+      <form action="/cart" method="post">
+        <div class="cart-main__items">
+          {% for item in cart.items %}
+            <div class="cart-main__item">
+              <a href="{{ item.url }}" class="cart-main__item-image">
+                {% if item.image != blank %}
+                  <img 
+                    src="{{ item.image | image_url: width: 200 }}"
+                    alt="{{ item.image.alt | default: item.title }}"
+                    width="100"
+                    height="100"
+                    loading="lazy"
+                  >
+                {% endif %}
+              </a>
+              
+              <div class="cart-main__item-details">
+                <a href="{{ item.url }}" class="cart-main__item-title">{{ item.product.title }}</a>
+                
+                {% if item.variant.title != 'Default Title' %}
+                  <p class="cart-main__item-variant">{{ item.variant.title }}</p>
+                {% endif %}
+                
+                <div class="cart-main__item-price">{{ item.final_line_price | money }}</div>
+              </div>
+              
+              <div class="cart-main__item-actions">
+                <div data-quantity-wrapper>
+                  <button type="button" class="product-main__quantity-btn" data-quantity-minus>-</button>
+                  <input 
+                    type="number"
+                    name="updates[]"
+                    value="{{ item.quantity }}"
+                    min="0"
+                    class="product-main__quantity-input"
+                    data-quantity-input
+                  >
+                  <button type="button" class="product-main__quantity-btn" data-quantity-plus>+</button>
+                </div>
+                
+                <a href="/cart/change?line={{ forloop.index }}&quantity=0" class="cart-main__item-remove">
+                  Remove
+                </a>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+        
+        <div class="cart-main__summary">
+          <div class="cart-main__subtotal">
+            <span>Subtotal</span>
+            <span class="cart-main__subtotal-price">{{ cart.total_price | money }}</span>
+          </div>
+          
+          <p class="cart-main__note">Shipping & taxes calculated at checkout</p>
+          
+          <a href="/checkout" class="btn btn-gradient cart-main__checkout">
+            Checkout →
+          </a>
+          
+          <a href="/collections/all" class="cart-main__continue">Continue Shopping</a>
+        </div>
+      </form>
+    {% else %}
+      <div class="cart-main__empty">
+        <p class="cart-main__empty-text">Your bag is empty</p>
+        <a href="/collections/all" class="btn btn-gradient">Start Shopping</a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cart Main",
+  "class": "section-cart-main",
+  "settings": []
+}
+{% endschema %}
