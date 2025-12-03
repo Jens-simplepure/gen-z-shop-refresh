@@ -30,8 +30,10 @@
     <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
   {%- endunless -%}
   
-  {{ settings.font_heading | font_face: font_display: 'swap' }}
-  {{ settings.font_body | font_face: font_display: 'swap' }}
+  <style>
+    {{ settings.font_heading | font_face: font_display: 'swap' }}
+    {{ settings.font_body | font_face: font_display: 'swap' }}
+  </style>
   
   <!-- Only load Permanent Marker from Google (not available in Shopify) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
