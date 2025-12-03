@@ -1,0 +1,1063 @@
+/* =============================================================================
+   HORIZON THEME - GEN Z DESIGN SYSTEM
+   Komplette CSS-Datei zum direkten Einfügen in assets/base.css (am Ende)
+   oder als separate Datei assets/gen-z-styles.css einbinden
+   ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   1. CSS VARIABLEN / DESIGN TOKENS
+   ----------------------------------------------------------------------------- */
+
+:root {
+  /* Gen Z Akzentfarben */
+  --gen-z-lime: #BFFF00;
+  --gen-z-lime-rgb: 191, 255, 0;
+  --gen-z-coral: #FF6B6B;
+  --gen-z-coral-rgb: 255, 107, 107;
+  --gen-z-cyan: #00F5FF;
+  --gen-z-cyan-rgb: 0, 245, 255;
+  
+  /* Dark Theme Hintergründe */
+  --gen-z-bg-dark: #0A0A0A;
+  --gen-z-bg-elevated: #141414;
+  --gen-z-bg-surface: #1A1A1A;
+  --gen-z-bg-hover: #242424;
+  
+  /* Text Farben */
+  --gen-z-text-primary: #FFFFFF;
+  --gen-z-text-secondary: #A0A0A0;
+  --gen-z-text-muted: #666666;
+  
+  /* Gradienten */
+  --gen-z-gradient-primary: linear-gradient(135deg, var(--gen-z-lime) 0%, var(--gen-z-cyan) 100%);
+  --gen-z-gradient-secondary: linear-gradient(135deg, var(--gen-z-coral) 0%, #FF8E53 100%);
+  --gen-z-gradient-dark: linear-gradient(180deg, var(--gen-z-bg-dark) 0%, var(--gen-z-bg-elevated) 100%);
+  
+  /* Glow Effekte */
+  --gen-z-glow-lime: 0 0 20px rgba(var(--gen-z-lime-rgb), 0.5);
+  --gen-z-glow-coral: 0 0 20px rgba(var(--gen-z-coral-rgb), 0.5);
+  --gen-z-glow-cyan: 0 0 20px rgba(var(--gen-z-cyan-rgb), 0.5);
+  
+  /* Schatten */
+  --gen-z-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --gen-z-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --gen-z-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --gen-z-shadow-glow: 0 0 40px rgba(var(--gen-z-lime-rgb), 0.15);
+  
+  /* Border Radius */
+  --gen-z-radius-sm: 8px;
+  --gen-z-radius-md: 12px;
+  --gen-z-radius-lg: 16px;
+  --gen-z-radius-xl: 24px;
+  --gen-z-radius-full: 9999px;
+  
+  /* Transitions */
+  --gen-z-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --gen-z-transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --gen-z-transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* -----------------------------------------------------------------------------
+   2. KEYFRAME ANIMATIONEN
+   ----------------------------------------------------------------------------- */
+
+@keyframes gen-z-glow-pulse {
+  0%, 100% {
+    box-shadow: var(--gen-z-glow-lime);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(var(--gen-z-lime-rgb), 0.8);
+  }
+}
+
+@keyframes gen-z-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gen-z-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes gen-z-bounce-subtle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes gen-z-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes gen-z-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes gen-z-text-glow {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(var(--gen-z-lime-rgb), 0.5);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(var(--gen-z-lime-rgb), 0.8), 0 0 30px rgba(var(--gen-z-lime-rgb), 0.4);
+  }
+}
+
+/* Animation Utility Klassen */
+.gen-z-animate-glow {
+  animation: gen-z-glow-pulse 2s ease-in-out infinite;
+}
+
+.gen-z-animate-slide-up {
+  animation: gen-z-slide-up 0.6s ease-out forwards;
+}
+
+.gen-z-animate-fade-in {
+  animation: gen-z-fade-in 0.4s ease-out forwards;
+}
+
+.gen-z-animate-bounce {
+  animation: gen-z-bounce-subtle 2s ease-in-out infinite;
+}
+
+.gen-z-animate-float {
+  animation: gen-z-float 3s ease-in-out infinite;
+}
+
+/* -----------------------------------------------------------------------------
+   3. DARK THEME BASIS
+   Füge diese Klasse zum <body> hinzu oder nutze Horizon's Theme Settings
+   ----------------------------------------------------------------------------- */
+
+body.gen-z-dark,
+[data-theme="gen-z-dark"] {
+  background-color: var(--gen-z-bg-dark);
+  color: var(--gen-z-text-primary);
+}
+
+body.gen-z-dark *,
+[data-theme="gen-z-dark"] * {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* -----------------------------------------------------------------------------
+   4. TYPOGRAFIE
+   ----------------------------------------------------------------------------- */
+
+/* Display Schrift - für Headlines */
+.gen-z-text-display {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+/* Body Schrift */
+.gen-z-text-body {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* Akzent Schrift - für Labels, Tags */
+.gen-z-text-accent {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.75em;
+}
+
+/* Text Gradient */
+.gen-z-text-gradient {
+  background: var(--gen-z-gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gen-z-text-gradient-coral {
+  background: var(--gen-z-gradient-secondary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Text Glow */
+.gen-z-text-glow {
+  text-shadow: 0 0 10px rgba(var(--gen-z-lime-rgb), 0.5);
+}
+
+.gen-z-text-glow-animated {
+  animation: gen-z-text-glow 2s ease-in-out infinite;
+}
+
+/* Text Farben */
+.gen-z-text-lime {
+  color: var(--gen-z-lime);
+}
+
+.gen-z-text-coral {
+  color: var(--gen-z-coral);
+}
+
+.gen-z-text-cyan {
+  color: var(--gen-z-cyan);
+}
+
+.gen-z-text-muted {
+  color: var(--gen-z-text-secondary);
+}
+
+/* -----------------------------------------------------------------------------
+   5. BUTTONS
+   ----------------------------------------------------------------------------- */
+
+/* Basis Button Reset */
+.gen-z-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: none;
+  border-radius: var(--gen-z-radius-full);
+  cursor: pointer;
+  transition: all var(--gen-z-transition-base);
+  text-decoration: none;
+}
+
+/* Primary Button - Lime Gradient */
+.gen-z-button--primary {
+  background: var(--gen-z-gradient-primary);
+  color: #000000;
+  box-shadow: var(--gen-z-glow-lime);
+}
+
+.gen-z-button--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(var(--gen-z-lime-rgb), 0.7);
+}
+
+.gen-z-button--primary:active {
+  transform: translateY(0);
+}
+
+/* Secondary Button - Coral */
+.gen-z-button--secondary {
+  background: var(--gen-z-gradient-secondary);
+  color: #FFFFFF;
+  box-shadow: var(--gen-z-glow-coral);
+}
+
+.gen-z-button--secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(var(--gen-z-coral-rgb), 0.7);
+}
+
+/* Outline Button */
+.gen-z-button--outline {
+  background: transparent;
+  color: var(--gen-z-lime);
+  border: 2px solid var(--gen-z-lime);
+}
+
+.gen-z-button--outline:hover {
+  background: var(--gen-z-lime);
+  color: #000000;
+  box-shadow: var(--gen-z-glow-lime);
+}
+
+/* Ghost Button */
+.gen-z-button--ghost {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--gen-z-text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.gen-z-button--ghost:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--gen-z-lime);
+}
+
+/* Glow Button mit Animation */
+.gen-z-button--glow {
+  background: var(--gen-z-lime);
+  color: #000000;
+  animation: gen-z-glow-pulse 2s ease-in-out infinite;
+}
+
+.gen-z-button--glow:hover {
+  animation-play-state: paused;
+  box-shadow: 0 0 40px rgba(var(--gen-z-lime-rgb), 0.9);
+}
+
+/* Button Größen */
+.gen-z-button--sm {
+  padding: 10px 20px;
+  font-size: 12px;
+}
+
+.gen-z-button--lg {
+  padding: 18px 36px;
+  font-size: 16px;
+}
+
+/* -----------------------------------------------------------------------------
+   6. PRODUCT CARDS
+   ----------------------------------------------------------------------------- */
+
+.gen-z-card {
+  background: var(--gen-z-bg-elevated);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--gen-z-radius-lg);
+  overflow: hidden;
+  transition: all var(--gen-z-transition-base);
+  position: relative;
+}
+
+.gen-z-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(var(--gen-z-lime-rgb), 0.3);
+  box-shadow: var(--gen-z-shadow-glow);
+}
+
+/* Card Image Container */
+.gen-z-card__image {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  background: var(--gen-z-bg-surface);
+}
+
+.gen-z-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--gen-z-transition-slow);
+}
+
+.gen-z-card:hover .gen-z-card__image img {
+  transform: scale(1.08);
+}
+
+/* Card Content */
+.gen-z-card__content {
+  padding: 16px;
+}
+
+.gen-z-card__title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--gen-z-text-primary);
+  margin: 0 0 8px 0;
+  transition: color var(--gen-z-transition-fast);
+}
+
+.gen-z-card:hover .gen-z-card__title {
+  color: var(--gen-z-lime);
+}
+
+.gen-z-card__price {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--gen-z-lime);
+}
+
+.gen-z-card__price--compare {
+  font-size: 14px;
+  color: var(--gen-z-text-muted);
+  text-decoration: line-through;
+  margin-left: 8px;
+}
+
+/* Quick Add Button */
+.gen-z-card__quick-add {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all var(--gen-z-transition-base);
+}
+
+.gen-z-card:hover .gen-z-card__quick-add {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* -----------------------------------------------------------------------------
+   7. BADGES / TAGS
+   ----------------------------------------------------------------------------- */
+
+.gen-z-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-radius: var(--gen-z-radius-full);
+}
+
+.gen-z-badge--sale {
+  background: var(--gen-z-gradient-secondary);
+  color: #FFFFFF;
+  animation: gen-z-bounce-subtle 2s ease-in-out infinite;
+}
+
+.gen-z-badge--new {
+  background: var(--gen-z-gradient-primary);
+  color: #000000;
+}
+
+.gen-z-badge--soldout {
+  background: var(--gen-z-bg-surface);
+  color: var(--gen-z-text-muted);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.gen-z-badge--limited {
+  background: transparent;
+  color: var(--gen-z-cyan);
+  border: 1px solid var(--gen-z-cyan);
+  box-shadow: var(--gen-z-glow-cyan);
+}
+
+/* -----------------------------------------------------------------------------
+   8. HEADER / NAVIGATION
+   ----------------------------------------------------------------------------- */
+
+.gen-z-header {
+  background: rgba(10, 10, 10, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.gen-z-header__logo {
+  transition: all var(--gen-z-transition-base);
+}
+
+.gen-z-header__logo:hover {
+  filter: drop-shadow(0 0 10px rgba(var(--gen-z-lime-rgb), 0.5));
+}
+
+/* Navigation Links */
+.gen-z-nav__link {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--gen-z-text-primary);
+  text-decoration: none;
+  padding: 8px 16px;
+  position: relative;
+  transition: color var(--gen-z-transition-fast);
+}
+
+.gen-z-nav__link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--gen-z-gradient-primary);
+  transition: all var(--gen-z-transition-base);
+  transform: translateX(-50%);
+}
+
+.gen-z-nav__link:hover {
+  color: var(--gen-z-lime);
+}
+
+.gen-z-nav__link:hover::after {
+  width: 100%;
+}
+
+/* Cart Icon Badge */
+.gen-z-cart__count {
+  background: var(--gen-z-lime);
+  color: #000000;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* -----------------------------------------------------------------------------
+   9. FOOTER
+   ----------------------------------------------------------------------------- */
+
+.gen-z-footer {
+  background: var(--gen-z-gradient-dark);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 60px 0 30px;
+}
+
+.gen-z-footer__title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gen-z-lime);
+  margin-bottom: 20px;
+}
+
+.gen-z-footer__link {
+  color: var(--gen-z-text-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color var(--gen-z-transition-fast);
+  display: block;
+  padding: 6px 0;
+}
+
+.gen-z-footer__link:hover {
+  color: var(--gen-z-text-primary);
+}
+
+/* Newsletter */
+.gen-z-newsletter__input {
+  background: var(--gen-z-bg-surface);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--gen-z-radius-full);
+  padding: 14px 20px;
+  color: var(--gen-z-text-primary);
+  font-family: 'Inter', sans-serif;
+  width: 100%;
+  transition: all var(--gen-z-transition-base);
+}
+
+.gen-z-newsletter__input:focus {
+  outline: none;
+  border-color: var(--gen-z-lime);
+  box-shadow: var(--gen-z-glow-lime);
+}
+
+.gen-z-newsletter__input::placeholder {
+  color: var(--gen-z-text-muted);
+}
+
+/* Social Icons */
+.gen-z-social__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--gen-z-bg-surface);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--gen-z-text-primary);
+  transition: all var(--gen-z-transition-base);
+}
+
+.gen-z-social__link:hover {
+  background: var(--gen-z-lime);
+  color: #000000;
+  border-color: var(--gen-z-lime);
+  transform: translateY(-3px);
+  box-shadow: var(--gen-z-glow-lime);
+}
+
+/* -----------------------------------------------------------------------------
+   10. FORMS / INPUTS
+   ----------------------------------------------------------------------------- */
+
+.gen-z-input {
+  background: var(--gen-z-bg-surface);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--gen-z-radius-md);
+  padding: 14px 18px;
+  color: var(--gen-z-text-primary);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  width: 100%;
+  transition: all var(--gen-z-transition-base);
+}
+
+.gen-z-input:focus {
+  outline: none;
+  border-color: var(--gen-z-lime);
+  box-shadow: 0 0 0 3px rgba(var(--gen-z-lime-rgb), 0.1);
+}
+
+.gen-z-input::placeholder {
+  color: var(--gen-z-text-muted);
+}
+
+.gen-z-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gen-z-text-secondary);
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* Select Dropdown */
+.gen-z-select {
+  appearance: none;
+  background: var(--gen-z-bg-surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23BFFF00' d='M6 8L1 3h10z'/%3E%3C/svg%3E") no-repeat right 16px center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--gen-z-radius-md);
+  padding: 14px 44px 14px 18px;
+  color: var(--gen-z-text-primary);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all var(--gen-z-transition-base);
+}
+
+.gen-z-select:focus {
+  outline: none;
+  border-color: var(--gen-z-lime);
+}
+
+/* -----------------------------------------------------------------------------
+   11. PRODUCT PAGE
+   ----------------------------------------------------------------------------- */
+
+.gen-z-product__title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: clamp(28px, 5vw, 42px);
+  line-height: 1.1;
+  color: var(--gen-z-text-primary);
+  margin-bottom: 16px;
+}
+
+.gen-z-product__price {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 28px;
+  color: var(--gen-z-lime);
+}
+
+.gen-z-product__price--compare {
+  font-size: 18px;
+  color: var(--gen-z-text-muted);
+  text-decoration: line-through;
+  margin-left: 12px;
+}
+
+/* Variant Picker */
+.gen-z-variant__option {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  height: 48px;
+  padding: 0 16px;
+  background: var(--gen-z-bg-surface);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--gen-z-radius-md);
+  color: var(--gen-z-text-primary);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all var(--gen-z-transition-fast);
+}
+
+.gen-z-variant__option:hover {
+  border-color: var(--gen-z-lime);
+}
+
+.gen-z-variant__option.is-active,
+.gen-z-variant__option[aria-checked="true"] {
+  background: var(--gen-z-lime);
+  border-color: var(--gen-z-lime);
+  color: #000000;
+  font-weight: 600;
+}
+
+/* Color Swatches */
+.gen-z-swatch {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all var(--gen-z-transition-fast);
+}
+
+.gen-z-swatch:hover {
+  transform: scale(1.1);
+}
+
+.gen-z-swatch.is-active {
+  border-color: var(--gen-z-lime);
+  box-shadow: var(--gen-z-glow-lime);
+}
+
+/* Quantity Selector */
+.gen-z-quantity {
+  display: inline-flex;
+  align-items: center;
+  background: var(--gen-z-bg-surface);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--gen-z-radius-full);
+  overflow: hidden;
+}
+
+.gen-z-quantity__button {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: var(--gen-z-text-primary);
+  font-size: 18px;
+  cursor: pointer;
+  transition: all var(--gen-z-transition-fast);
+}
+
+.gen-z-quantity__button:hover {
+  background: var(--gen-z-lime);
+  color: #000000;
+}
+
+.gen-z-quantity__input {
+  width: 50px;
+  text-align: center;
+  background: transparent;
+  border: none;
+  color: var(--gen-z-text-primary);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.gen-z-quantity__input:focus {
+  outline: none;
+}
+
+/* -----------------------------------------------------------------------------
+   12. CART
+   ----------------------------------------------------------------------------- */
+
+.gen-z-cart__item {
+  display: flex;
+  gap: 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.gen-z-cart__item-image {
+  width: 100px;
+  height: 100px;
+  border-radius: var(--gen-z-radius-md);
+  overflow: hidden;
+  background: var(--gen-z-bg-surface);
+}
+
+.gen-z-cart__item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gen-z-cart__item-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--gen-z-text-primary);
+}
+
+.gen-z-cart__item-price {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  color: var(--gen-z-lime);
+}
+
+.gen-z-cart__totals {
+  background: var(--gen-z-bg-elevated);
+  border-radius: var(--gen-z-radius-lg);
+  padding: 24px;
+  margin-top: 24px;
+}
+
+.gen-z-cart__total-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.gen-z-cart__total-row:last-child {
+  border-bottom: none;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+/* -----------------------------------------------------------------------------
+   13. COLLECTION PAGE
+   ----------------------------------------------------------------------------- */
+
+.gen-z-collection__hero {
+  background: var(--gen-z-gradient-dark);
+  padding: 60px 0;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.gen-z-collection__title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: clamp(32px, 6vw, 56px);
+  color: var(--gen-z-text-primary);
+  margin-bottom: 16px;
+}
+
+.gen-z-collection__description {
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  color: var(--gen-z-text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Filters */
+.gen-z-filter__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--gen-z-bg-surface);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--gen-z-radius-full);
+  color: var(--gen-z-text-primary);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all var(--gen-z-transition-fast);
+}
+
+.gen-z-filter__button:hover,
+.gen-z-filter__button.is-active {
+  border-color: var(--gen-z-lime);
+  color: var(--gen-z-lime);
+}
+
+/* Sort Dropdown */
+.gen-z-sort {
+  background: var(--gen-z-bg-surface);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--gen-z-radius-full);
+  padding: 10px 20px;
+  color: var(--gen-z-text-primary);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+}
+
+/* -----------------------------------------------------------------------------
+   14. ANNOUNCEMENT BAR
+   ----------------------------------------------------------------------------- */
+
+.gen-z-announcement {
+  background: var(--gen-z-gradient-primary);
+  color: #000000;
+  padding: 10px 20px;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.gen-z-announcement a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+/* -----------------------------------------------------------------------------
+   15. LOADING STATES
+   ----------------------------------------------------------------------------- */
+
+.gen-z-skeleton {
+  background: linear-gradient(90deg, 
+    var(--gen-z-bg-surface) 25%, 
+    var(--gen-z-bg-hover) 50%, 
+    var(--gen-z-bg-surface) 75%
+  );
+  background-size: 200% 100%;
+  animation: gen-z-shimmer 1.5s infinite;
+  border-radius: var(--gen-z-radius-md);
+}
+
+.gen-z-loading {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gen-z-loading__spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(var(--gen-z-lime-rgb), 0.2);
+  border-top-color: var(--gen-z-lime);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   16. UTILITY KLASSEN
+   ----------------------------------------------------------------------------- */
+
+/* Backgrounds */
+.gen-z-bg-dark { background-color: var(--gen-z-bg-dark); }
+.gen-z-bg-elevated { background-color: var(--gen-z-bg-elevated); }
+.gen-z-bg-surface { background-color: var(--gen-z-bg-surface); }
+.gen-z-bg-gradient { background: var(--gen-z-gradient-primary); }
+.gen-z-bg-gradient-coral { background: var(--gen-z-gradient-secondary); }
+
+/* Borders */
+.gen-z-border { border: 1px solid rgba(255, 255, 255, 0.1); }
+.gen-z-border-lime { border-color: var(--gen-z-lime); }
+.gen-z-border-glow { box-shadow: var(--gen-z-glow-lime); }
+
+/* Hover Effects */
+.gen-z-hover-lift {
+  transition: transform var(--gen-z-transition-base);
+}
+.gen-z-hover-lift:hover {
+  transform: translateY(-4px);
+}
+
+.gen-z-hover-glow {
+  transition: box-shadow var(--gen-z-transition-base);
+}
+.gen-z-hover-glow:hover {
+  box-shadow: var(--gen-z-glow-lime);
+}
+
+.gen-z-hover-scale {
+  transition: transform var(--gen-z-transition-base);
+}
+.gen-z-hover-scale:hover {
+  transform: scale(1.05);
+}
+
+/* Spacing - falls benötigt */
+.gen-z-section { padding: 60px 0; }
+.gen-z-section-lg { padding: 100px 0; }
+
+/* Custom Scrollbar */
+.gen-z-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.gen-z-scrollbar::-webkit-scrollbar-track {
+  background: var(--gen-z-bg-dark);
+}
+
+.gen-z-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--gen-z-bg-hover);
+  border-radius: 4px;
+}
+
+.gen-z-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--gen-z-lime);
+}
+
+/* Selection */
+::selection {
+  background: var(--gen-z-lime);
+  color: #000000;
+}
+
+/* -----------------------------------------------------------------------------
+   17. RESPONSIVE ANPASSUNGEN
+   ----------------------------------------------------------------------------- */
+
+@media (max-width: 768px) {
+  .gen-z-button {
+    padding: 12px 24px;
+    font-size: 13px;
+  }
+  
+  .gen-z-product__title {
+    font-size: 28px;
+  }
+  
+  .gen-z-collection__hero {
+    padding: 40px 0;
+  }
+  
+  .gen-z-section {
+    padding: 40px 0;
+  }
+}
+
+/* =============================================================================
+   INSTALLATION HINWEISE:
+   
+   1. Diese Datei kopieren
+   2. In Shopify Admin → Themes → Edit Code gehen
+   3. Unter "Assets" eine neue Datei erstellen: gen-z-styles.css
+   4. Code einfügen und speichern
+   5. In layout/theme.liquid vor </head> einfügen:
+      {{ 'gen-z-styles.css' | asset_url | stylesheet_tag }}
+   
+   6. Optional: Google Fonts in theme.liquid vor </head> einfügen:
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+   
+   7. Um Dark Mode zu aktivieren, füge dem <body> Tag die Klasse "gen-z-dark" hinzu
+   ============================================================================= */
